@@ -1,0 +1,21 @@
+{
+    "name": "barkermn01/UnitTestJSONSchema",
+    "autoload": {
+        "psr-0" : {
+            "barkermn01/UnitTestJSONSchema" : "src/barkermn01/UnitTestJSONSchema/"
+        }
+    },
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/barkermn01UnitTestJSONSchema"
+		}
+	],
+	"require": {
+        "php": "^7.2"
+    },
+    "require-dev": {
+        "seld/jsonlint": "^1.7.1",
+		"justinrainbow/json-schema": "^5.2.7"
+    }
+}
