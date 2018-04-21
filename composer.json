@@ -1,7 +1,7 @@
 {
     "name": "barkermn01/unittest-josn-schema",
 	"type": "library",
-    "description": "Allows Unit testing of JSON-Schema's against a supplied JSON-Schema schema or an in-schema defined",
+    "description": "Allows Unit testing of JSON-Schema's against a supplied JSON-Schema schema or an in-schema defined schema",
 	"license": "Apache-2.0",
 	"authors": [
         {
