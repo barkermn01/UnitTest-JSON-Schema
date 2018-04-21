@@ -1,5 +1,5 @@
 {
-    "name": "barkermn01/UnitTestJSONSchema",
+    "name": "barkermn01/unittest-josn-schema",
 	"type": "library",
     "description": "Allows Unit testing of JSON-Schema's against a supplied JSON-Schema schema or an in-schema defined",
 	"license": "AF2",
