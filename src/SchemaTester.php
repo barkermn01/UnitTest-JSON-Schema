@@ -1,11 +1,12 @@
 <?php
-namespace barkermn01\UnitTestJSONSchema;
+namespace UnitTestJSONSchema;
 
 use Seld\JsonLint\JsonParser;
 
-class UnitTestJSONSchema{
+
+class SchemaTester{
 	// holds the schema we're testing against
-	private $definedSchema = NULL;
+	private $TestSchemaLocation = NULL;
 	
 	// holds any errors that result from testing
 	private $errors = [];
@@ -14,23 +15,24 @@ class UnitTestJSONSchema{
 	private $testComplete = false;
 	
 	// allows for a user to defined the schema to test against
-	public function defineSchema(string $uri)
+	public function DefineSchema(string $uri)
 	{
-		$this->definedSchema = $uri;
+		$this->TestSchemaLocation = $uri;
 	}
 	
-	public function TestSchema(string $schema)
+	public function TestSchema(string $json)
 	{
-		$obj = null;
 		// test json lint if passes $obj will be set
 		try{
 			$parser = new JsonParser();
-			$obj = $parser->lint($json);
+			$parser->lint($json, JsonParser::DETECT_KEY_CONFLICTS);
 		}catch(\Exception $e){
 			// failed record the error
 			$this->errors[] = "JSON Lint Failure: ".$e->getMessage();
 			$this->testComplete = true;
 		}
+		
+		$obj = $parser->parse($json);
 		
 		// if we failed lint stop testing
 		if($this->testComplete){
@@ -39,9 +41,8 @@ class UnitTestJSONSchema{
 		
 		// holds the schema path we need to download
 		$schemaUri = NULL;
-		
 		// do we have a schema pre defined
-		if(is_null($this->definedSchema)) {
+		if(is_null($this->TestSchemaLocation)) {
 			// hack past php's use of $
 			$schemaFeild = "\$schema";
 			
@@ -49,14 +50,14 @@ class UnitTestJSONSchema{
 			if(isset($obj->$schemaFeild)){
 				$schemaUri = $obj->$schemaFeild;
 			}else{
-				throw new Exception("No JSON-Schema schema to test against not supplied by class or caller");
+				throw new \Exception("No JSON-Schema schema to test against not supplied by schema or test implementation");
 			}
 		}else{
-			$schemaUri = $this->definedSchema;
+			$schemaUri = $this->TestSchemaLocation;
 		}
 		
-		$validator = new JsonSchema\Validator;
-		$validator->validate($data, (object)['$ref' => $schemaUri]);
+		$validator = new \JsonSchema\Validator;
+		$validator->validate($obj, (object)['$ref' => $schemaUri]);
 		
 		if (!$validator->isValid()) {
 			echo "JSON does not validate. Violations:\n";
@@ -68,11 +69,16 @@ class UnitTestJSONSchema{
 		return;
 	}
 	
+	public function hasErrors()
+	{
+		return count($this->errors) > 0;
+	}
+	
 	public function getErrors()
 	{
 		if(empty($this->errors)){
 			return false;
 		}
-		return $this->errors;
+		return implode("\r\n", $this->errors);
 	}
 }

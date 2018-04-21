@@ -1,20 +1,29 @@
 {
     "name": "barkermn01/UnitTestJSONSchema",
+	"type": "library",
+    "description": "Allows Unit testing of JSON-Schema's against a supplied JSON-Schema schema or an in-schema defined",
+	"license": "AF2",
+	"authors": [
+        {
+            "name": "Martin Barker",
+            "role": "Developer"
+        }
+    ],
     "autoload": {
-        "psr-0" : {
-            "barkermn01/UnitTestJSONSchema" : "src/barkermn01/UnitTestJSONSchema/"
+        "psr-4": {
+            "UnitTestJSONSchema\\": "src"
         }
     },
 	"repositories": [
 		{
 			"type": "vcs",
-			"url": "https://github.com/barkermn01UnitTestJSONSchema"
+			"url": "https://github.com/barkermn01/UnitTestJSONSchema"
 		}
 	],
+	"version":"1.0.0",
 	"require": {
-        "php": "^7.2"
-    },
-    "require-dev": {
+        "php": "^7.2",
+        "phpunit/phpunit": "^7.1",
         "seld/jsonlint": "^1.7.1",
 		"justinrainbow/json-schema": "^5.2.7"
     }
