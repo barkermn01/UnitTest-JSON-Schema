@@ -3,7 +3,7 @@ A simple and easy to use class to aid in the validation and testing of a JSON-sc
 
 ## How to Install
 ```
-composer require "barkermn01/unittest-josn-schema:dev-master"
+composer require "barkermn01/unittest-josn-schema"
 ```
 
 ## How to use
