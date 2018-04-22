@@ -18,6 +18,8 @@ composer require "barkermn01/unittest-josn-schema"
   }
 }
 ```
+Package is released in the namespace `UnitTestJSONSchema;`
+
 #### Supply a schema in test cases manually.
 ```php
 $SchemaName = "test.schema.json";
